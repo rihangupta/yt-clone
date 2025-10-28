@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
     videos.forEach((video) => {
       const div = document.createElement("div");
       div.className = "video-card";
-// Inside the videos.forEach loop
+// Find this line again in the HOME PAGE LOGIC
 div.innerHTML = `
   <div class="thumb">
     <img src="${video.thumbnail}" alt="${video.title}">
   </div>
-  <h3 title="${video.title}">${video.title}</h3>
-  <p>${video.channelName || 'Creator'}<br>${video.views} views</p>
+  <h3>${video.title}</h3>
+  <p><a href="channel.html?name=${encodeURIComponent(video.channelName)}">${video.channelName || 'Creator'}</a><br>${video.views} views</p>
 `;
       // When a video card is clicked, save its data and go to the watch page
       div.addEventListener("click", () => {
@@ -219,7 +219,37 @@ div.innerHTML = `
       const title = document.getElementById("videoTitle").value;
       const fileInput = document.getElementById("videoFile");
       const file = fileInput.files[0];
+// --- CHANNEL PAGE LOGIC ---
+  const channelVideoGrid = document.getElementById("channelVideoGrid");
+  if (channelVideoGrid) {
+    // Get the channel name from the URL query parameter
+    const params = new URLSearchParams(window.location.search);
+    const channelName = params.get('name');
+    
+    document.getElementById("channelTitle").innerText = channelName || "Channel Not Found";
 
+    const videos = JSON.parse(localStorage.getItem("videos")) || [];
+    // Filter the videos to get only those from the current channel
+    const channelVideos = videos.filter(video => video.channelName === channelName);
+
+    if (channelVideos.length > 0) {
+      channelVideos.forEach(video => {
+        const div = document.createElement("div");
+        div.className = "video-card";
+        div.innerHTML = `
+          <div class="thumb"><img src="${video.thumbnail}" alt="${video.title}"></div>
+          <h3>${video.title}</h3>
+          <p>${video.channelName}<br>${video.views} views</p>`;
+        div.addEventListener("click", () => {
+          localStorage.setItem("selectedVideo", JSON.stringify(video));
+          window.location.href = 'watch.html';
+        });
+        channelVideoGrid.appendChild(div);
+      });
+    } else {
+      channelVideoGrid.innerHTML = "<p>No videos found for this channel.</p>";
+    }
+  }
       if (file) {
         const reader = new FileReader();
         reader.onload = function () {
