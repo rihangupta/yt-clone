@@ -425,3 +425,7 @@ body.dark-mode .skeleton::after {
   0% { left: -150%; }
   100% { left: 150%; }
 }
+/* --- Video Card Channel Name --- */
+.video-card p {
+  line-height: 1.4; /* Add a bit of space between lines */
+}
