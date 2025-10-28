@@ -61,13 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
     videos.forEach((video) => {
       const div = document.createElement("div");
       div.className = "video-card";
-      div.innerHTML = `
-        <div class="thumb">
-          <img src="${video.thumbnail}" alt="${video.title}">
-        </div>
-        <h3 title="${video.title}">${video.title}</h3>
-        <p>${video.views} views</p>
-      `;
+// Inside the videos.forEach loop
+div.innerHTML = `
+  <div class="thumb">
+    <img src="${video.thumbnail}" alt="${video.title}">
+  </div>
+  <h3 title="${video.title}">${video.title}</h3>
+  <p>${video.channelName || 'Creator'}<br>${video.views} views</p>
+`;
       // When a video card is clicked, save its data and go to the watch page
       div.addEventListener("click", () => {
         localStorage.setItem("selectedVideo", JSON.stringify(video));
@@ -223,12 +224,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const reader = new FileReader();
         reader.onload = function () {
           const videos = JSON.parse(localStorage.getItem("videos")) || [];
+// Inside the uploadForm event listener
+const title = document.getElementById("videoTitle").value;
+const channelName = document.getElementById("channelName").value; // Get the new value
+const fileInput = document.getElementById("videoFile");
+// ...
+
 const newVideo = {
   title: title,
+  channelName: channelName, // Add this property
   thumbnail: "https://picsum.photos/400/225?random=" + Math.floor(Math.random() * 1000),
   views: 0,
-  likes: 0, // Add this line
-  dislikes: 0, // Add this line
+  likes: 0,
+  dislikes: 0,
   file: reader.result,
 };
           videos.push(newVideo);
