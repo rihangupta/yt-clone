@@ -1,0 +1,427 @@
+/* --- Variables & General Reset --- */
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #222;
+  --text-muted: #555;
+  --card-bg: #fff;
+  --header-bg: #fff;
+  --accent: #ff0000;
+}
+
+body.dark-mode {
+  --bg-color: #0f0f0f;
+  --text-color: #f1f1f1;
+  --text-muted: #aaa;
+  --card-bg: #181818;
+  --header-bg: #202020;
+  --accent: #ff4d4d;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.4s, color 0.4s;
+}
+
+/* --- Page Transition Effects --- */
+body {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+body.page-enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.page-exit {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* --- Navbar / Header --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-bg);
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.search-bar {
+  flex: 1;
+  max-width: 500px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  outline: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+  border-color: #1c62b9;
+  box-shadow: 0 0 6px rgba(28, 98, 185, 0.3);
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-icons a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.mode-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: transform 0.2s;
+}
+.mode-btn:hover {
+  transform: scale(1.2);
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  position: fixed;
+  top: 60px; /* Height of navbar */
+  left: 0;
+  width: 200px;
+  background-color: var(--card-bg);
+  height: 100%;
+  padding-top: 20px;
+  transition: background-color 0.4s;
+}
+
+.sidebar a {
+  display: block;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 12px 20px;
+}
+
+.sidebar a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .sidebar a:hover {
+  background-color: #383838;
+}
+
+/* --- Main Content & Video Grid --- */
+.video-grid {
+  margin-left: 220px;
+  margin-top: 80px; /* Space for navbar */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.video-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.video-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.video-card .thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: #333; /* Placeholder bg */
+}
+
+.video-card .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 350ms ease;
+}
+
+.video-card:hover .thumb img {
+  transform: scale(1.08);
+}
+
+.video-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  padding: 0 10px;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0 10px 10px 10px;
+}
+
+
+/* --- Responsive Layout --- */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+  .video-grid {
+    margin-left: 0;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 5px;
+  }
+  .search-bar {
+    width: 90%;
+    margin-top: 5px;
+  }
+  .video-grid {
+    margin-top: 120px; /* More space for taller navbar */
+    grid-template-columns: 1fr; /* Single column */
+    gap: 1rem;
+  }
+  .video-card h3 {
+    font-size: 0.95rem;
+  }
+}
+/* --- Comments Section --- */
+.comments-section {
+  margin-top: 20px;
+  max-width: 800px;
+}
+
+#commentForm {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#commentInput {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  color: var(--text-color);
+  transition: border-color 0.3s;
+}
+
+#commentInput:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+#commentForm button {
+  padding: 10px 20px;
+  background-color: #065fd4;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.comment {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.comment-author {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+/* --- Like/Dislike Buttons --- */
+.video-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.video-actions button {
+  background-color: #3f3f3f;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s;
+}
+
+body.dark-mode .video-actions button {
+   background-color: #3f3f3f;
+}
+
+body:not(.dark-mode) .video-actions button {
+   background-color: #f2f2f2;
+   color: #333;
+}
+
+
+.video-actions button:hover {
+  background-color: #555555;
+}
+
+body:not(.dark-mode) .video-actions button:hover {
+   background-color: #e0e0e0;
+}
+/* --- Watch Page Two-Column Layout --- */
+.watch-page-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 60px; /* Space for fixed navbar */
+  align-items: flex-start;
+}
+
+.watch-container {
+  flex: 3; /* Video player takes up more space */
+}
+
+.up-next-sidebar {
+  flex: 1; /* Sidebar takes up less space */
+  max-width: 400px;
+}
+
+/* --- Styling for each item in the "Up Next" list --- */
+.up-next-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.up-next-item:hover {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+.up-next-item img {
+  width: 160px; /* Fixed width for thumbnail */
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.up-next-item .info h4 {
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.up-next-item .info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Responsive: On smaller screens, stack the layout */
+@media (max-width: 1000px) {
+  .watch-page-layout {
+    flex-direction: column;
+  }
+  .up-next-sidebar {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+/* --- YouTube Logo Styling --- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* This adds a small space between the icon and the text */
+  font-size: 1.8rem; /* Makes the logo text a bit bigger and bolder */
+  font-weight: 600;
+  letter-spacing: -1.5px; /* Tightens up the text like the real logo */
+}
+
+.logo svg {
+  color: #FF0000; /* This makes ONLY the SVG icon red */
+}
+/* --- Remove underline from logo link --- */
+.logo-link {
+  text-decoration: none; /* Removes the underline */
+  color: inherit; /* Makes the link inherit the color of its parent */
+}
+/* --- Skeleton Loading Effect --- */
+.skeleton {
+  background-color: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+body.dark-mode .skeleton {
+  background-color: #2a2a2a;
+}
+.skeleton .thumb { background-color: #c7c7c7; }
+.skeleton h3 { background-color: #c7c7c7; height: 1rem; width: 80%; }
+.skeleton p { background-color: #c7c7c7; height: 0.8rem; width: 50%; }
+body.dark-mode .skeleton .thumb,
+body.dark-mode .skeleton h3,
+body.dark-mode .skeleton p {
+  background-color: #404040;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+body.dark-mode .skeleton::after {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+}
+
+@keyframes shimmer {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
