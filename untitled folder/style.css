@@ -382,7 +382,12 @@ body:not(.dark-mode) .video-actions button:hover {
 }
 
 .logo svg {
-  color: #FF0000; /* This makes ONLY the SVG icon red */
+  color: #FF0000; /* Sets the default icon color to red (for light mode) */
+  transition: color 0.4s; /* Adds a smooth color transition */
+}
+
+body.dark-mode .logo svg {
+  color: #FFFFFF; /* Overrides the color to be white ONLY in dark mode */
 }
 /* --- Remove underline from logo link --- */
 .logo-link {
