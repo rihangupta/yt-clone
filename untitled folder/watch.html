@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Watch - YouTube</title>
+
   <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="youtube.png">
+<script src="https://kit.fontawesome.com/136716749f.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="navbar">
@@ -17,9 +19,9 @@
     </a>
     <input type="text" class="search-bar" placeholder="Search (disabled)">
     <div class="nav-icons">
-      <a href="index.html">🏠 Home</a>
-      <a href="upload.html">⬆️ Upload</a>
-      <button id="modeToggle" class="mode-btn" aria-label="Toggle dark mode">🌙</button>
+      <a href="index.html"><i class="fa-regular fa-house"></i> Home</a>
+      <a href="upload.html"><i class="fa-regular fa-arrow-up-from-bracket"></i> Upload</a>
+      <button id="modeToggle" class="mode-btn" aria-label="Toggle dark mode"><i class="fa-regular fa-moon"></i></button>
     </div>
   </header>
 
@@ -32,8 +34,9 @@
       </video>
       <h2 id="videoTitle" style="margin-top: 15px;">Video Title</h2>
       <div class="video-actions">
-        <button id="likeBtn" aria-label="Like video">👍 <span>0</span></button>
-        <button id="dislikeBtn" aria-label="Dislike video">👎 <span>0</span></button>
+        <button id="likeBtn" aria-label="Like video"><i class="fa-regular fa-thumbs-up"></i> <span>0</span></button>
+        <button id="dislikeBtn" aria-label="Dislike video"><i class="fa-regular fa-thumbs-down"></i> <span>0</span></button>
+<button id="shareBtn" aria-label="Share video"><i class="fa-solid fa-share"></i> Share</button>
       </div>
       <p id="videoDescription">Video description will go here.</p>
       <hr>
